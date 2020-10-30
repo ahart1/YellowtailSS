@@ -1,18 +1,20 @@
 # Yellowtail Flounder Stock Synthesis Starter file ??? Revisit details
-# V3.30.16
+#V3.30.16.02;_2020_09_21;_safe;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.2
+#Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
+#Foreign copyrights may apply. See copyright.txt for more information.
 #C starter comment here
 YTF_data.ss
 YTF_control_file.ss
-0 # Use initial values in control file
+1 # Use initial values in control file (shouldn't be zero unless you are reading initial values from a .pin file)
 1 # Run display detail
 1 # detailed output (0=minimal for data-limited, 1=high (w/ wtatage.ss_new), 2=brief) 
 0 # write 1st iteration details to echoinput.sso file (0,1) 
-0 # write parm values to ParmTrace.sso (0=no,1=good,active; 2=good,all; 3=every_iter,all_parms; 4=every,active)
+1 # write parm values to ParmTrace.sso (0=no,1=good,active; 2=good,all; 3=every_iter,all_parms; 4=every,active)
 0 # write to cumreport.sso (0=no,1=like&timeseries; 2=add survey fits)
 1 # Include prior_like for non-estimated parameters (0,1) 
 1 # Use Soft Boundaries to aid convergence (0,1) (recommended)
 3 # Number of datafiles to produce: 1st is input, 2nd is estimates, 3rd and higher are bootstrap
-10 # Turn off estimation for parameters entering after this phase
+0 # Turn off estimation for parameters entering after this phase 0 = do 1 call
 0 # MCeval burn interval
 1 # MCeval thin interval
 0 # jitter initial parm value by this fraction
