@@ -24,6 +24,7 @@
 # Time varying param info: biology/spawn-recruitment/catchability/tag/selectivity
 0 0 0 0 0
 
+# __________________________M, GROWTH, FECUNDITY, REC, MVMT_______________________________________________________________________________
 # Natural Mortality
 0 # Use age independent natural mortality (SAW 54 used 0.3 based on average Lorenzen over all ages, see SAW 54 pg 358)
 
@@ -94,7 +95,7 @@
 0 0 0 0 0 0 0 0 0 0 # This is where my control file breaks and I don't know why???????????????????????????
 
 
-
+# __________________________RECRUITMENT_______________________________________________________________________________
 # Spawner-Recruit
 3 # Beverton-Holt with 2 parameters log_R0 and steepness_h
 0 # Don't use steepness in initial equilibrium R calc.
@@ -107,7 +108,6 @@
 0		     2		0.3		0.8		   0.8			 0			     -99		   0			0			      0			      0			0		0		0			#sigma_R
 -5		   5		0		  0		     1			   0			     -4		     0			0			      0			      0			0		0		0			#SR_Regime
 0		     0		0		  0		     0			   0			     -99		   0			0			      0			      0			0		0		0			#SR_Autocorrelation
-
 
 # Recruitment deviation
 2 # Rec devs not constrained to sum to zero
@@ -130,7 +130,7 @@
   0 # Number of rec devs to read
 # End advanced options
 
-
+# __________________________FISHING MORTALITY SETUP_______________________________________________________________________________
 # Fishing Mortality Method 
 0.3 # F ballpark summed across fleets
 -1935 # F ballpark year, negative disables
@@ -145,64 +145,59 @@
 # 0		3		0.1		0		99			0			1		0			0			0			0			0		0		0			#InitF_Fleet3				
 # 0		3		0.1		0		99			0			1		0			0			0			0			0		0		0			#InitF_Fleet4				
 
-
-# Catchability ??? use analytical solution rather than estimating?
-# Fleet   Link_type  Link_info extra_se  biasadj float fleetname
-1         1           0         0       0       1     # com_domestic
-2         1           0         0       0       1     # com_foreign    
+# __________________________Q SETUP FOR CPUE INDICES_______________________________________________________________________________
+# Catchability Setup for fleets with CPUE or survey data ??? use analytical solution rather than estimating?
+# Fleet   Link_type  Link_info extra_se  biasadj float fleetname   
 3         1           0         0       0       1     # spring_survey
 4         1           0         0       0       1     # fall_survey 
 -9999     0           0         0       0       0     # End line
 
 # Catchability parameters
 # Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
-0     1     -0.3     0         0       0           -1        0         0         0           0          0      0         0         # com_domestic logQ
-0     1     -0.3     0         0       0           -1        0         0         0           0          0      0         0         # com_foreign logQ
-0     1     -0.3     0         0       0           -1        0         0         0           0          0      0         0         # spring_survey logQ
-0     1     -0.3     0         0       0           -1        0         0         0           0          0      0         0         # fall_survey logQ
+-25     25     -7     0         1       0           -1        0         0         0           0          0      0         0         # spring_survey logQ
+-25     25     -7     0         1       0           -1        0         0         0           0          0      0         0         # fall_survey logQ
 
-# Selectivity and Discard Setup # Used logistic selectivity # specified correctly???
+# __________________________LENGTH-BASED SELECTIVITY SETUP_______________________________________________________________________________
+# Selectivity and Discard Setup # Used logistic selectivity - First column = 0 so not used # specified correctly??? 
 # Pattern   Discard   Male  Special   Label
-1              1         0     0          # Fleet 1 com_domestic
-1              1         0     0          # Fleet 2 com_foreign
-1              0         0     0          # Fleet 3 spring_survey
-1              0         0     0          # Fleet 4 fall_survey
+0              2         0     0          # Fleet 1 com_domestic ??? Assume discard mortality determined by 4 param
+0              0         0     0          # Fleet 2 com_foreign
+0              0         0     0          # Fleet 3 spring_survey
+0              0         0     0          # Fleet 4 fall_survey
 
+# __________________________AGE-BASED SELECTIVITY SETUP_______________________________________________________________________________
 # Age Selectivity Setup #??? set up correctly? Logistic selectivity
 # Pattern   Discard   Male  Special   Label
-12              1         0     0          # Fleet 1 com_domestic
-12              1         0     0          # Fleet 2 com_foreign
+12              0         0     0          # Fleet 1 com_domestic
+12              0         0     0          # Fleet 2 com_foreign
 12              0         0     0          # Fleet 3 spring_survey
 12              0         0     0          # Fleet 4 fall_survey
 
-# Selectivity Parameters
+# Length-based Selectivity Parameters
 # Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
-0     5       1     0         0         0         4         0         0         0             0         0     0       0       # com_domestic_age_at_inflection
-0     5       1     0         0         0         4         0         0         0             0         0     0       0       # com_foreigh_age_at_inflection
-0     5       1     0         0         0         4         0         0         0             0         0     0       0       # spring_survey_age_at_inflection
-0     5       1     0         0         0         4         0         0         0             0         0     0       0       # fall_survey_age_at_inflection
-0     10      0.2   0         0         0         4         0         0         0             0         0     0       0       # com_domestic_width_95%_select #??? range and starting value realistic?
-0     10      0.2   0         0         0         4         0         0         0             0         0     0       0       # com_foreign_width_95%_select
-0     10      0.2   0         0         0         4         0         0         0             0         0     0       0       # spring_survey_width_95%_select
-0     10      0.2   0         0         0         4         0         0         0             0         0     0       0       # fall_survey_width_95%_select
+10     100    30    30        1         0         4         0         0         0             0         0     0       0       # Retain_L_inflection_com_domestic(1) # Retention ascending inflection 
+-1     20      1    1         0         0        -4         0         0         0             0         0     0       0       # Retain_L_width_com_domestic(1) # Retention ascending mat_slope
+-10    1000    999  999       1         0        -4         0         0         0             0         0     0       0       # Retain_L_asymptote_logit_com_domestic(1) # Max retention
+-1     2       0    0         1         0        -4         0         0         0             0         0     0       0       # Retain_L_male_offset_com_domestic(1) # Male offset
 
-# Retention - 4 parameter logistic
-p1 = ascending inflection 
-p2 = ascending Mat_slope_Fem_GP_1
-p3 = max Retention
-p4 = male offset
+# Discard Mortality Parameters
+# Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
+-10    10     -5    -5        1         0        -2         0         0         0             0         0     0       0       # DiscMort_L_infl_com_domestic(1) # Discard descending inflection 
+-1     2       1    1         1         0        -2         0         0         0             0         0     0       0       # Disc_Mort_L_width_com_domestic(1) # Discard descending slope
+-1     2      0.95  0.95      1         0        -4         0         0         0             0         0     0       0       # Disc_Mort_L_level_old_com_domestic(1) # Max discard mortality # assume 95% discard mortality for now???
+-1     2      0     0         1         0        -4         0         0         0             0         0     0       0       # DiscMort_L_male_offset_com_domestic(1) # Male offset
 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-
-# Discard Mortality
-0= only retained dead
-1 all selected fish dead
-p1 = descending inflection 
-p2 = descending slope 
-p3 = max discard mortality 
-p4 = male offset
-
-# Sex-specific selectivity
+# Age Selectivity Parameters 
+# Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
+0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_com_domestic(1)
+0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_com_domestic(1)
+0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_com_foreign(2)
+0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_com_foreign(2)
+0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_spring_survey(3)
+0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_spring_survey(3)
+0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_fall_survey(4)
+0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_fall_survey(4)
+# 
 
 # Dirichlet Multinomial Error for Data Weighting - Not used
 
@@ -212,17 +207,51 @@ p4 = male offset
 # Tag Recapture Parameters - Not used
 0 # No tagging data
 
-# Variance Adjustment Factors ??? page 141 manual
+# Time-varying Parameters - Not used
 
+# Variance Adjustment Factors - Not used, could be used to adjust data weighting 
+# Factor  Fleet   Value   Description
+-9999     0       0       # End section
 
+# Lambdas (Emphasis Factors) ??? page 142
+4 # Max lambda phase
+1 # SD offset used when estimating variance parameters so contribute to log likelihood
+
+# Lambda Parameters ??? Not entirely sure what this does/should be used for
+# Likelihood_component  Fleet   Phase     Lambda_value    Size_Freq_Method
+8                       1       3         1               1                 # com_domestic catch fit
+8                       2       3         1               1                 # com_foreign catch fit 
+1                       3       3         1               1                 # spring_survey fit
+1                       4       3         1               1                 # fall_survey fit 
+-9999                   1       1         1               1                 # End section 
+
+# Controls for Variance of Derived Quantities
+0 # No additional std dev reporting
+
+# TO DEBUG
 # change phases
-# Check data
 # don't estimate as many parameters
+# Check data
 # Maybe start 1973 and assume not fished in first -999 in catch, extra param
 
+# Setting Phases
+# Scale pop. In first phase
+# - Rzero
+# - Rec devs
+
+# Phase 2
+# - Growth
+# Phase 3
+# - Selectivity
+# Phases 4&5
+# - Time-varying
+# - Results shouldn’t depend on phasing
+# Sensitivity analysis to check that this works as desired
 
 
 
+
+999 #End of the control file input
 
 
 
