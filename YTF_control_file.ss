@@ -27,6 +27,7 @@
 # __________________________M, GROWTH, FECUNDITY, REC, MVMT_______________________________________________________________________________
 # Natural Mortality
 0 # Use age independent natural mortality (SAW 54 used 0.3 based on average Lorenzen over all ages, see SAW 54 pg 358)
+# the above differed from Erin ??? need to make different M assumption
 
 # Growth
 1 # Use von Bertalanffy ??? arbitrary
@@ -35,10 +36,10 @@
 -999 # Growth in plus group
 0 # Placeholder
 0 # Std dev added to length-at-age
-4 # CV pattern is lognormal dist. of size-at-age ??? since age comp available
+0 # CV pattern is lognormal dist. of size-at-age ??? since age comp available, I thought this should be 4???
 
 # Maturity-Fecundity
-2 # Age logistic maturity option ??? since age comp available
+2 # Age logistic maturity option ??? since age comp available ??? Erin chose 1 length logitstic
 1 # First mature age (SAW 54 Figure B10 shows age/length at 50% maturity between 1.5-2.5yr)
 1 # Fecundity option f= w(a+b*w) ??? irrelevant if weight-at-age file used ???
 
@@ -56,14 +57,14 @@
 # Growth/Maturity-Fecundity Parameters
 # Lo 	Hi 		Init 	Prior 	Prior_SD 	Prior_type	PHASE 	env_link 	dev_link 	dev_minyr 	dev_maxyr 	dev_PH 	Block 	Block_Fxn 	Parameter
 #??? How do you figure out what parameters to use? How do you choose informative starting values? Why not Natural mortality? Why no params for males set Init to 0 and phase to negative see page 94?
-0		  1		  0.3		0.3		      0			    0			   -3		     0			0			0			0			0			0	0			# NatM_p_1_Fem_GP_1 	= Natural mortality estimated in Phase 3 ??? See table B7 page 407 of SAW54
-1		  45		22		22		      0			    0			   -2		     0			0			0			0			0			0	0			# L_at_Amin_Fem_GP_1 # Eq. 7ish SAW 54 page 364, calc length at age 0
-10    50		40		40		      0			    0			   -4		     0			0			0			0			0			0	0			# L_at_Amax_Fem_GP_1
-0.05  1.5		0.97	0.97	      0			    0			   -4		     0			0			0			0			0			0	0			# VonBert_K_Fem_GP_1
+0		  1		  0.3		0.3		      0			    0			   -4		     0			0			0			0			0			0	0			# NatM_p_1_Fem_GP_1 	= Natural mortality estimated in Phase 3 ??? See table B7 page 407 of SAW54
+0.01	20		5.7		3.5		      0			    0			   -2		     0			0			0			0			0			0	0			# L_at_Amin_Fem_GP_1 # Eq. 7ish SAW 54 page 364, calc length at age 0
+20.01 50		35.2	35.2	      0			    0			   -2		     0			0			0			0			0			0	0			# L_at_Amax_Fem_GP_1
+0.3   0.99	0.85	0.85	      0			    0			   -2		     0			0			0			0			0			0	0			# VonBert_K_Fem_GP_1
 0.05	0.25	0.1		0.1		      0			    0			   -3		     0			0			0			0			0			0	0   	# lnSD_young_Fem_GP_1  # Variability for size at age <= Amin
 0.05	0.25	0.1		0.1		      0			    0			   -3		     0			0			0			0			0			0	0   	# lnSD_old_Fem_GP_1
--3    3     4.0023e-06 4.0023e-06 0     0        -3        0      0     0     0     0     0 0     # WTlen_1_Fem_GP_1  # length-weight SAW54 page 364
--3		4		  3.23	3.23	      0			    0			   -3		     0			0			0			0			0			0	0			# WTlen_2_Fem_GP_1
+1e-10 1e-3  9.7e-06 9.7e-06 0     0        -3        0      0     0     0     0     0 0     # WTlen_1_Fem_GP_1  # length-weight SAW54 page 364 = possible other data source???
+2.5		3.5		2.96	2.96	      0			    0			   -3		     0			0			0			0			0			0	0			# WTlen_2_Fem_GP_1
 20		35		27.4	27.4	      0			    0			   -3		     0			0			0			0			0			0	0			# Mat_50%_Fem_GP_1 # in stock assess
 -3		3		  -0.25	-0.25	      0			    0			   -3		     0			0			0			0			0			0	0			# Mat_slope_Fem_GP_1
 -3		3		  1		  1		        0			    0			   -3		     0			0			0			0			0			0	0			# Eggs/kg_intercept_Fem_GP_1
@@ -81,7 +82,7 @@
 
 # Cohort growth dev base Parameters ??? not sure where this is comming from
 # Lo 	Hi 		Init 	Prior 	Prior_SD 	Prior_type	PHASE 	env_link 	dev_link 	dev_minyr 	dev_maxyr 	dev_PH 	Block 	Block_Fxn	Parameter
-0.1		10		1		1		1			0			-1		0			0			0			0			0		0		0			# CohortGrowDev
+0.1		10		1		  1		    1			    0			      -1		  0		      0			    -2			    0			      0		    0		    0			    # CohortGrowDev
 
 # Movement Parameters - NONE
 # Age Error Parameters - NONE
@@ -89,10 +90,10 @@
 
 # Sex Ratio Parameters (fraction femail by growth pattern) ??? why needed, no parameter above specifies need for this parameter?
 # Lo 	Hi 			Init 	Prior 	Prior_SD 	Prior_type	PHASE 	env_link 	dev_link 	dev_minyr 	dev_maxyr 	dev_PH 	Block 	Block_Fxn	  Parameter
-1e-06	0.999999	0.5		0.5		0.5			       0			-99		       0			  0			    0			      0			      0		0		        0			  #FracFemale_GP1
+1e-06	1	      1		 0.5		0.5			       0			-2		       0			  0			    0			      0			      0		0		        0			  #FracFemale_GP1
 
 # Seasonal Biology Parameters (NONE here)
-0 0 0 0 0 0 0 0 0 0 # This is where my control file breaks and I don't know why???????????????????????????
+0 0 0 0 0 0 0 0 0 0 
 
 
 # __________________________RECRUITMENT_______________________________________________________________________________
@@ -103,17 +104,17 @@
 
 # Spawner-Recruit Parameters ??? I don't understand the regime & autocorrelation, see pg 103 of manual
 # Lo    Hi 		Init 	Prior 	Prior_SD 	Prior_type	PHASE 	env_link 	dev_link 	dev_minyr 	dev_maxyr 	dev_PH 	Block 	Block_Fxn	Parameter
-3		    31		9		  10.3	   10			   0			      1		     0			0			      0			      0			0		0		0			# log_R0
-0.2		   1		0.9		0.9		   0.05		   1			     -4		     0			0			      0			      0			0		0		0			#steepness_h # ??? hard to estimate with rec devs, try fixing but letting rec devs vary, estimate R0 and fix everything else, Fishlife Jim Thorson R package
-0		     2		0.3		0.8		   0.8			 0			     -99		   0			0			      0			      0			0		0		0			#sigma_R
+3		    31		25		  10.3	   10			   0			      1		     0			0			      0			      0			0		0		0			# log_R0
+0.2		   1		0.9		0.9		   0.05		   1			     -2		     0			0			      0			      0			0		0		0			#steepness_h # ??? hard to estimate with rec devs, try fixing but letting rec devs vary, estimate R0 and fix everything else, Fishlife Jim Thorson R package
+0		     2		0.3		0.8		   0.8			 0			     -4		     0			0			      0			      0			0		0		0			#sigma_R
 -5		   5		0		  0		     1			   0			     -4		     0			0			      0			      0			0		0		0			#SR_Regime
-0		     0		0		  0		     0			   0			     -99		   0			0			      0			      0			0		0		0			#SR_Autocorrelation
+0		     0		0		  0		     0			   0			     -4		     0			0			      0			      0			0		0		0			#SR_Autocorrelation
 
 # Recruitment deviation
 2 # Rec devs not constrained to sum to zero
-1935 # first year of main rec devs ??? how to pick?
+1973 # first year of main rec devs ??? how to pick? - currently first year with both spring/fall surveys
 2011 # Last year of main rec devs
-3 # Phase of main rec devs
+-2 # Phase of main rec devs 
 1 # Advanced options:
   0 # No early rec dev
   6 # Phase for early rec dev
@@ -148,14 +149,14 @@
 # __________________________Q SETUP FOR CPUE INDICES_______________________________________________________________________________
 # Catchability Setup for fleets with CPUE or survey data ??? use analytical solution rather than estimating?
 # Fleet   Link_type  Link_info extra_se  biasadj float fleetname   
-3         1           0         0       0       1     # spring_survey
-4         1           0         0       0       1     # fall_survey 
+3         1           0         0       0       0     # spring_survey float = 1 analytical solution may be causing nan report for q
+4         1           0         0       0       0     # fall_survey 
 -9999     0           0         0       0       0     # End line
 
 # Catchability parameters
 # Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
--25     25     -7     0         1       0           -1        0         0         0           0          0      0         0         # spring_survey logQ
--25     25     -7     0         1       0           -1        0         0         0           0          0      0         0         # fall_survey logQ
+-25     25     -7     0         1       0         -3        0         0         0           0          0      0         0         # spring_survey logQ
+-25     25     -7     0         1       0         -3        0         0         0           0          0      0         0         # fall_survey logQ
 
 # __________________________LENGTH-BASED SELECTIVITY SETUP_______________________________________________________________________________
 # Selectivity and Discard Setup # Used logistic selectivity - First column = 0 so not used # specified correctly??? 
@@ -175,29 +176,29 @@
 
 # Length-based Selectivity Parameters
 # Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
-10     100    30    30        1         0         4         0         0         0             0         0     0       0       # Retain_L_inflection_com_domestic(1) # Retention ascending inflection 
--1     20      1    1         0         0        -4         0         0         0             0         0     0       0       # Retain_L_width_com_domestic(1) # Retention ascending mat_slope
--10    1000    999  999       1         0        -4         0         0         0             0         0     0       0       # Retain_L_asymptote_logit_com_domestic(1) # Max retention
--1     2       0    0         1         0        -4         0         0         0             0         0     0       0       # Retain_L_male_offset_com_domestic(1) # Male offset
+10     100    30    30        1         0         -3         0         0         0             0         0     0       0       # Retain_L_inflection_com_domestic(1) # Retention ascending inflection 
+-1     20      1    1         0         0         -3         0         0         0             0         0     0       0       # Retain_L_width_com_domestic(1) # Retention ascending mat_slope
+-10    1000    999  999       1         0         -3         0         0         0             0         0     0       0       # Retain_L_asymptote_logit_com_domestic(1) # Max retention
+-1     2       0    0         1         0         -3         0         0         0             0         0     0       0       # Retain_L_male_offset_com_domestic(1) # Male offset
 
 # Discard Mortality Parameters
 # Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
--10    10     -5    -5        1         0        -2         0         0         0             0         0     0       0       # DiscMort_L_infl_com_domestic(1) # Discard descending inflection 
--1     2       1    1         1         0        -2         0         0         0             0         0     0       0       # Disc_Mort_L_width_com_domestic(1) # Discard descending slope
--1     2      0.95  0.95      1         0        -4         0         0         0             0         0     0       0       # Disc_Mort_L_level_old_com_domestic(1) # Max discard mortality # assume 95% discard mortality for now???
--1     2      0     0         1         0        -4         0         0         0             0         0     0       0       # DiscMort_L_male_offset_com_domestic(1) # Male offset
+-10    10     -5    -5        1         0        -3         0         0         0             0         0     0       0       # DiscMort_L_infl_com_domestic(1) # Discard descending inflection 
+-1     2       1    1         1         0        -3         0         0         0             0         0     0       0       # Disc_Mort_L_width_com_domestic(1) # Discard descending slope
+-1     2      0.95  0.95      1         0        -3         0         0         0             0         0     0       0       # Disc_Mort_L_level_old_com_domestic(1) # Max discard mortality # assume 95% discard mortality for now???
+-1     2      0     0         1         0        -3         0         0         0             0         0     0       0       # DiscMort_L_male_offset_com_domestic(1) # Male offset
 
 # Age Selectivity Parameters 
 # Lo  Hi    Init  Prior   Prior_SD  Prior_type  PHASE   env_link  dev_link  dev_minyr   dev_maxyr   dev_PH  Block   Block_Fxn Parameter
-0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_com_domestic(1)
-0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_com_domestic(1)
-0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_com_foreign(2)
-0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_com_foreign(2)
-0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_spring_survey(3)
-0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_spring_survey(3)
-0     10    1.5   0       0         0           2       0         0         0           0           0       0       0         # Age_inflection_fall_survey(4)
-0     10    0.05  0       0         0           3       0         0         0           0           0       0       0         # Age_95%width_fall_survey(4)
-# 
+0     10    1.5   0       0         0           -3       0         0         0           0           0       0       0         # Age_inflection_com_domestic(1)
+0     10    0.05  0       0         0           -3       0         0         0           0           0       0       0         # Age_95%width_com_domestic(1)
+0     10    1.5   0       0         0           -3       0         0         0           0           0       0       0         # Age_inflection_com_foreign(2)
+0     10    0.05  0       0         0           -3       0         0         0           0           0       0       0         # Age_95%width_com_foreign(2)
+0     10    1.5   0       0         0           -3       0         0         0           0           0       0       0         # Age_inflection_spring_survey(3)
+0     10    0.05  0       0         0           -3       0         0         0           0           0       0       0         # Age_95%width_spring_survey(3)
+0     10    1.5   0       0         0           -3       0         0         0           0           0       0       0         # Age_inflection_fall_survey(4)
+0     10    0.05  0       0         0           -3       0         0         0           0           0       0       0         # Age_95%width_fall_survey(4)
+#  ??? estimate the above eventually?
 
 # Dirichlet Multinomial Error for Data Weighting - Not used
 
@@ -213,22 +214,26 @@
 # Factor  Fleet   Value   Description
 -9999     0       0       # End section
 
-# Lambdas (Emphasis Factors) ??? page 142
+# Lambdas (Emphasis Factors) ??? page 142 what does this do
 4 # Max lambda phase
 1 # SD offset used when estimating variance parameters so contribute to log likelihood
 
 # Lambda Parameters ??? Not entirely sure what this does/should be used for
 # Likelihood_component  Fleet   Phase     Lambda_value    Size_Freq_Method
-8                       1       3         1               1                 # com_domestic catch fit
-8                       2       3         1               1                 # com_foreign catch fit 
-1                       3       3         1               1                 # spring_survey fit
-1                       4       3         1               1                 # fall_survey fit 
+# 8                       1       4         1               1                 # com_domestic catch fit
+# 8                       2       4         1               1                 # com_foreign catch fit 
+# 1                       3       4         1               1                 # spring_survey fit
+# 1                       4       4         1               1                 # fall_survey fit 
 -9999                   1       1         1               1                 # End section 
 
 # Controls for Variance of Derived Quantities
 0 # No additional std dev reporting
 
 # TO DEBUG
+
+# Problem with survey/discard/agecomp obj_fun
+
+
 # change phases
 # don't estimate as many parameters
 # Check data
