@@ -22,7 +22,7 @@
 # Auto-generation
 1 # Env/blcok/deviation adjustment method for time varying param = warning relative to base param bounds
 # Time varying param info: biology/spawn-recruitment/catchability/tag/selectivity
-0 0 0 0 0
+0 0 0 0 0 # ??? Gavin put 1s here
 
 # __________________________M, GROWTH, FECUNDITY, REC, MVMT_______________________________________________________________________________
 # Natural Mortality
@@ -39,7 +39,7 @@
 0 # CV pattern is lognormal dist. of size-at-age ??? since age comp available, I thought this should be 4???
 
 # Maturity-Fecundity
-2 # Age logistic maturity option ??? since age comp available ??? Erin chose 1 length logitstic
+2 # Age logistic maturity option ??? Gavin said 1 for logistic maturity
 1 # First mature age (SAW 54 Figure B10 shows age/length at 50% maturity between 1.5-2.5yr)
 1 # Fecundity option f= w(a+b*w) ??? irrelevant if weight-at-age file used ???
 
@@ -111,11 +111,11 @@
 0		     0		0		  0		     0			   0			     -4		     0			0			      0			      0			0		0		0			#SR_Autocorrelation
 
 # Recruitment deviation
-2 # Rec devs not constrained to sum to zero
+2 # ??? originally put 2 so estimate rec devs not constrained to sum to zero ??? Gavin set to 0 # No rec devs
 1973 # first year of main rec devs ??? how to pick? - currently first year with both spring/fall surveys
 2011 # Last year of main rec devs
 -2 # Phase of main rec devs 
-1 # Advanced options:
+1 # Advanced options: ??? Gavin turned off advanced options
   0 # No early rec dev
   6 # Phase for early rec dev
   0 # Phase for forecast recruitment
