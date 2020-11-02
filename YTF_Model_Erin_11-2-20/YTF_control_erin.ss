@@ -188,10 +188,10 @@
 #_discard_options:_0=none;_1=define_retention;_2=retention&mortality;_3=all_discarded_dead;_4=define_dome-shaped_retention
 #
 #_Pattern 	Discard 	Male 	Special
- 	0 	2 		0 	0 		# 1 com_domestic
- 	0 	0 		0 	0 		# 2 com_foreign
- 	0 	0 		0 	0 		# 3 spring_trawl
- 	0 	0 		0 	0 		# 4 fall_trawl
+ 	0 	    0 		    0 	    0 		# 1 com_domestic
+ 	0 	    0 		    0 	    0 		# 2 com_foreign 
+ 	0 	    0 		    0 	    0 		# 3 spring_trawl
+ 	0 	    0 		    0 	    0 		# 4 fall_trawl
 #
 # ----------------------------------------------------  AGE-BASED SELECTIVITY SETUP
 #_age_selex_patterns
@@ -212,25 +212,25 @@
 #Pattern:_27; parm=3+special; cubic spline in age
 #Pattern:_42; parm=2+special+3; // cubic spline; with 2 additional param for scaling (average over bin range)
 #
-#_Pattern 	Discard 	Male 	Special
- 12 		0 		0 	0 		# 1 com_domestic
- 15 		0 		0 	1 		# 2 com_foreign
- 12 		0 		0 	0 		# 3 spring_trawl
- 12 		0 		0 	0 		# 4 fall_trawl
+#_Pattern 	Discard    Male 	Special
+ 12 		0 		   0 	    0 		# 1 com_domestic
+ 15 		0 		   0 	    1 		# 2 com_foreign # !!! Mirror fleet 1
+ 12 		0 		   0 	    0 		# 3 spring_trawl
+ 12 		0 		   0 	    0 		# 4 fall_trawl
 #  ---------------------------------------------------------------------------------  SELECTIVITY PARAMETERS
 #  note: in the SAW54, model selectivity was by age, 50% at 3, 100% at 4.
 # ------------ length-based retention and discard mortality for fleet 1
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  	#  parm_name
 # No length selectivity            0            60           16          0             0             0           -2          0          0          0          0          0          0          0  	#  LenSel_P1_COM_DOMESTIC # !!! not used
 #             0            30           5           0             0             0           -3          0          0          0          0          0          0          0  	#  LenSel_P2_COM_DOMESTIC # !!! not used 
-            10            100           20	        0             0             0            3          0          0          0          0          0          0          0   	#  Retain_L_infl_com_domestic(1) 
-            -1            20            5           0      	      0             0            4          0          0          0          0          0          0          0  	#  Retain_L_width_com_domestic(1) 
-           -10            1000          999         10            1             0           -2          0          0          0          0          0          0          0  	#  Retain_L_asymptote_logit_com_domestic(1) 
-            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  Retain_L_maleoffset_com_domestic(1) 
-           -10            10            -5         -5             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_infl_com_domestic(1) # !!! why estimated if no discard data used?
-            -1             2             1          1             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_width_com_domestic(1)  
-            -1             2           0.9        0.9             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_level_com_domestic(1)	assumed 95% disc mort for now  
-            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_male_offset_com_domestic(1) 
+# No retention            10            100           20	        0             0             0            3          0          0          0          0          0          0          0   	#  Retain_L_infl_com_domestic(1) 
+#            -1            20            5           0      	      0             0            4          0          0          0          0          0          0          0  	#  Retain_L_width_com_domestic(1) 
+#          -10            1000          999         10            1             0           -2          0          0          0          0          0          0          0  	#  Retain_L_asymptote_logit_com_domestic(1) 
+#            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  Retain_L_maleoffset_com_domestic(1) 
+# No discards           -10            10            -5         -5             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_infl_com_domestic(1) # !!! why estimated if no discard data used?
+#            -1             2             1          1             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_width_com_domestic(1)  
+#            -1             2           0.9        0.9             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_level_com_domestic(1)	assumed 95% disc mort for now  
+#            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_male_offset_com_domestic(1) 
 
 #  -------- length selex
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  	#  parm_name
