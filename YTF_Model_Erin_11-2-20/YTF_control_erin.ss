@@ -1,4 +1,5 @@
 # YTF control file
+# !!! I adjusted so only inlude data 1973-2018 like assessment
 #V3.30.13-safe;_2019_03_09;_Stock_Synthesis_by_Richard_Methot_(NOAA)_using_ADMB_12.0
 #Stock Synthesis (SS) is a work of the U.S. Government and is not subject to copyright protection in the United States.
 #Foreign copyrights may apply. See copyright.txt for more information.
@@ -24,22 +25,18 @@
 #_Cond 1.0 # first age that moves (real age at begin of season, not integer) also cond on do_migration>0
 #_Cond 1 1 1 2 4 10 # example move definition for seas=1, morph=1, source=1 dest=2, age1=4, age2=10
 #
-#  constant selex in commercial fleet
-# 0 #_Nblock_Patterns
-# 1 #_blocks_per_pattern 
-# begin and end years of blocks
-# 1935 2018
+
 #  time blocks for selex
 1 #_Nblock_Patterns
 1 #_blocks_per_pattern 
 # begin and end years of blocks
-1999 2011	#	modern 6.5 inch mesh for trawls 
+1973 2018	
 #
 # controls for all timevary parameters 
 1 #_env/block/dev_adjust_method for all time-vary parms (1=warn relative to base parm bounds; 3=no bound check)
 #
 # AUTOGEN
-0 0 0 0 1 # autogen: 1st element for biology, 2nd for SR, 3rd for Q, 4th reserved, 5th for selex
+1 1 1 1 1 # autogen: 1st element for biology, 2nd for SR, 3rd for Q, 4th reserved, 5th for selex
 # where: 0 = autogen all time-varying parms; 1 = read each time-varying parm line; 2 = read then autogen if parm min==-12345
 #
 #_Available timevary codes
@@ -54,7 +51,7 @@
 2 	#_natM_type:_0=1Parm; 1=N_breakpoints;_2=Lorenzen;_3=agespecific;_4=agespec_withseasinterpolate
 1	#Lorenzen ref age
 # a0	a1	a2	a3	a4	a5	a6+		used average from table B7
-# 1.81 	0.293 	0.215 	0.194 	0.186 	0.182 	0.18
+# 1.81 	0.293 	0.215 	0.194 	0.186 	0.182 	0.18 # !!! why is this commented out
 #
 1 	# GrowthModel: 1=vonBert with L1&L2; 2=Richards with L1&L2; 3=age_specific_K_incr; 4=age_specific_K_decr; 5=age_specific_K_each; 6=NA; 7=NA; 8=growth cessation
 0 	#_Age(post-settlement)_for_L1;linear growth below this
@@ -93,18 +90,18 @@
  # 0 0 0 0 0 0 -4 0 0 0 0 0 0 0 # RecrDist_month_1
 #  Cohort growth dev base
 #_ LO 	HI 	INIT 	PRIOR 	PR_SD 	PR_type PHASE 	env_link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
- 0.1 	10 	1 	1 	1 	0 	-1 	0 0 0 0 0 0 0 # CohortGrowDev
+0.1 	10 	1 	    1 	    1 	    0     	-1  	0        0        0         0         0      0     0          # CohortGrowDev
 #  Movement
 #  Age Error from parameters
 #  catch multiplier
 #  fraction female, by GP
 #_ LO 	HI 	INIT 	PRIOR 	PR_SD 	PR_type PHASE 	env_link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
- 1e-06 	0.999999 0.5 	0.5 	0.5 	0 	-99 	0 0 0 0 0 0 0 # FracFemale_GP_1
+1e-06 	0.999999 0.5 	0.5 	0.5 	0 	-99 	0        0        0         0         0      0     0         # FracFemale_GP_1
 #
 #_no timevary MG parameters
 #
 #_seasonal_effects_on_biology_parms
- 0 0 0 0 0 0 0 0 0 0 #_femwtlen1,femwtlen2,mat1,mat2,fec1,fec2,Malewtlen1,malewtlen2,L1,K
+0 0 0 0 0 0 0 0 0 0 #_femwtlen1,femwtlen2,mat1,mat2,fec1,fec2,Malewtlen1,malewtlen2,L1,K
 #_ LO HI INIT PRIOR PR_SD PR_type PHASE
 #_Cond -2 2 0 0 -1 99 -2 #_placeholder when no seasonal MG parameters
 #
@@ -114,7 +111,7 @@
 0  #  future feature:  0/1 to make realized sigmaR a function of SR curvature
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn #  parm_name
              3            35          12            10.3            10            0          1          0          0          0          0          0          0          0 # SR_LN(R0)
-           0.2             1          0.75          0.75           0.064          3          -1          0          0          0          0          0          0          0 # SR_BH_steep
+           0.2             1          0.75          0.75           0.064          3          -1         0          0          0          0          0          0          0 # SR_BH_steep
              0             2          0.8           0.8           0.8             0         -99         0          0          0          0          0          0          0 # SR_sigmaR
             -5             5            0             0             1             0         -4          0          0          0          0          0          0          0 # SR_regime
              0             0            0             0             0             0         -99         0          0          0          0          0          0          0 # SR_autocorr
@@ -162,8 +159,8 @@
 #_5:  0/1 for biasadj or not
 #_6:  0/1 to float	float to use analytical
 #_   fleet      link link_info  extra_se   biasadj     float  	#  fleetname
-         3	1	0	0		0	1  	#  spring_trawl
-         4	1	0	0		0	1  	#  fall_trawl
+         3	    1	 0	        0		   0	       1  	    #  spring_trawl
+         4	    1	 0	        0		   0	       1  	    #  fall_trawl
 -9999 		0 	0 	0 		0 	0	#  end input
 #
 # Ln_Q base - we are using float BUT parameter lines still expected
@@ -224,33 +221,47 @@
 #  note: in the SAW54, model selectivity was by age, 50% at 3, 100% at 4.
 # ------------ length-based retention and discard mortality for fleet 1
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  	#  parm_name
-#             0            60           16          0             0             0           -2          0          0          0          0          0          0          0  	#  LenSel_P1_COM_DOMESTIC
-#             0            30           5           0             0             0           -3          0          0          0          0          0          0          0  	#  LenSel_P2_COM_DOMESTIC
-            10            100           20	    0             0             0            3          0          0          0          0          0          1          2   	#  Retain_L_infl_com_domestic(1)
-            -1            20            5           0      	  0             0            4          0          0          0          0          0          1          2  	#  Retain_L_width_com_domestic(1)
-           -10            1000          999         10            1             0           -2          0          0          0          0          0          1          2  	#  Retain_L_asymptote_logit_com_domestic(1)
-            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  Retain_L_maleoffset_com_domestic(1)
-           -10            10            -5         -5             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_infl_com_domestic(1)
-            -1             2             1          1             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_width_com_domestic(1)
-            -1             2           0.9        0.9             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_level_com_domestic(1)	assumed 95% disc mort for now
-            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_male_offset_com_domestic(1)
+# No length selectivity            0            60           16          0             0             0           -2          0          0          0          0          0          0          0  	#  LenSel_P1_COM_DOMESTIC # !!! not used
+#             0            30           5           0             0             0           -3          0          0          0          0          0          0          0  	#  LenSel_P2_COM_DOMESTIC # !!! not used 
+            10            100           20	        0             0             0            3          0          0          0          0          0          0          0   	#  Retain_L_infl_com_domestic(1) 
+            -1            20            5           0      	      0             0            4          0          0          0          0          0          0          0  	#  Retain_L_width_com_domestic(1) 
+           -10            1000          999         10            1             0           -2          0          0          0          0          0          0          0  	#  Retain_L_asymptote_logit_com_domestic(1) 
+            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  Retain_L_maleoffset_com_domestic(1) 
+           -10            10            -5         -5             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_infl_com_domestic(1) # !!! why estimated if no discard data used?
+            -1             2             1          1             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_width_com_domestic(1)  
+            -1             2           0.9        0.9             1             0           -2          0          0          0          0          0          0          0  	#  DiscMort_L_level_com_domestic(1)	assumed 95% disc mort for now  
+            -1             2             0          0             1             0           -4          0          0          0          0          0          0          0  	#  DiscMort_L_male_offset_com_domestic(1) 
+
 #  -------- length selex
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  	#  parm_name
-#             0            50           15          0             0             0          4          0          0          0          0          0          0          0  	#  LenSel_P1_COM_FOREIGN
-#             0            30           5           0             0             0          4          0          0          0          0          0          0          0  	#  LenSel_P2_COM_FOREIGN
-#             0            50           20          0             0             0          -2          0          0          0          0          0          0          0  	#  LenSel_P1_SPRING_TRAWL
-#	     0            30           5           0             0             0          -3          0          0          0          0          0          0          0  	#  LenSel_P2_SPRING_TRAWL
-#	     0            50           15          0             0             0          -2          0          0          0          0          0          0          0  	#  LenSel_P1_FALL_TRAWL
-#             0            30           5           0             0             0          -3          0          0          0          0          0          0          0  	#  LenSel_P2_FALL_TRAWL
-#  -------------------- age selex init close to SS estimate
-             0            10          2.3          0             0             0          3          0          0          0          0          0          1          2  	#  AgeSel_P1_com_domestic
-	     0            5           0.5          0             0             0          4          0          0          0          0          0          1          2  	#  AgeSel_P2_com_domestic
-#_flt2	     0            10          2.3          0             0             0          2          0          0          0          0          0          0          0  	#  AgeSel_P1_com_foreign
-#_flt2	     0            5           0.5          0             0             0          3          0          0          0          0          0          0          0  	#  AgeSel_P2_com_foreign
-             0            10          2.3          0             0             0          5          0          0          0          0          0          0          0  	#  AgeSel_P1_SPRING_TRAWL
-	     0            5           0.5          0             0             0          6          0          0          0          0          0          0          0  	#  AgeSel_P2_SPRING_TRAWL
-	     0            10          1.5          0             0             0          3          0          0          0          0          0          0          0  	#  AgeSel_P1_FALL_TRAWL
-             0            5           0.1          0             0             0          4          0          0          0          0          0          0          0  	#  AgeSel_P2_FALL_TRAWL
+#             0            50           15          0             0             0          4          0          0          0          0          0          0          0  	#  LenSel_P1_COM_FOREIGN # !!! not used 
+#             0            30           5           0             0             0          4          0          0          0          0          0          0          0  	#  LenSel_P2_COM_FOREIGN # !!! not used 
+#             0            50           20          0             0             0          -2          0          0          0          0          0          0          0  	#  LenSel_P1_SPRING_TRAWL # !!! not used 
+#	     0            30           5           0             0             0          -3          0          0          0          0          0          0          0  	#  LenSel_P2_SPRING_TRAWL # !!! not used 
+#	     0            50           15          0             0             0          -2          0          0          0          0          0          0          0  	#  LenSel_P1_FALL_TRAWL # !!! not used 
+#             0            30           5           0             0             0          -3          0          0          0          0          0          0          0  	#  LenSel_P2_FALL_TRAWL # !!! not used 
+
+#  -------------------- age selex init 
+#_          LO          HI          INIT        PRIOR           PR_SD     PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block   Blk_Fxn   #  parm_name
+            0           10          1.5         0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_com_domestic(1)
+            0           10          0.05        0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_com_domestic(1)
+#           0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_com_foreign(2) # !!! not used mirror fleet 1
+#           0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_com_foreign(2) # !!! not used mirror fleet 1
+            0           10          1.5         0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_spring_survey(3)
+            0           10          0.05        0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_spring_survey(3)
+            0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_fall_survey(4)
+            0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_fall_survey(4)
+
+# The below are the wrong parameters for the current model setup
+#             0            10          2.3          0             0             0          3          0          0          0          0          0          1          2  	#  AgeSel_P1_com_domestic
+#	     0            5           0.5          0             0             0          4          0          0          0          0          0          1          2  	#  AgeSel_P2_com_domestic
+#_flt2	     0            10          2.3          0             0             0          2          0          0          0          0          0          0          0  	#  AgeSel_P1_com_foreign # !!! not used mirrored
+#_flt2	     0            5           0.5          0             0             0          3          0          0          0          0          0          0          0  	#  AgeSel_P2_com_foreign # !!! not used mirrored
+#             0            10          2.3          0             0             0          5          0          0          0          0          0          0          0  	#  AgeSel_P1_SPRING_TRAWL
+#	     0            5           0.5          0             0             0          6          0          0          0          0          0          0          0  	#  AgeSel_P2_SPRING_TRAWL
+#	     0            10          1.5          0             0             0          3          0          0          0          0          0          0          0  	#  AgeSel_P1_FALL_TRAWL
+#             0            5           0.1          0             0             0          4          0          0          0          0          0          0          0  	#  AgeSel_P2_FALL_TRAWL
+
 #  -------------------- age selex: surveys fixed to mimic 2019 update
 #            0            10          2.3          0             0             0          2          0          0          0          0          0          0          0  	#  AgeSel_P1_com_domestic
 #	     0            5           0.5          0             0             0          3          0          0          0          0          0          0          0  	#  AgeSel_P2_com_domestic
@@ -261,18 +272,21 @@
 #	     0            10          3.0          0             0             0          2          0          0          0          0          0          0          0  	#  AgeSel_P1_FALL_TRAWL
 #            0            5           0.5          0             0             0          3          0          0          0          0          0          0          0  	#  AgeSel_P2_FALL_TRAWL
 #
-#_ TIME VARYING LENGTH retention for commercial fleet	#auto-gen in beginning of ctl was set to 1 for selex, below time vary parms only need the 1999+ block
+
+#_ TIME VARYING LENGTH retention for commercial fleet	#auto-gen in beginning of ctl was set to 1 for selex, below time vary parms only need the 1999+ block !!! not estimated since no discard data being used
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE  	#  parm_name
-            10            100           26	    0             0             0            3       	#  Retain_L_infl_com_domestic(1)_1999_2018
-            -1            20            5           0      	  0             0            4      	#  Retain_L_width_com_domestic(1)_1999_2018
-           -10            1000          999         10            1             0           -2      	#  Retain_L_asymptote_logit_com_domestic(1)_1999_2018
+#            10            100           26	        0             0             0            3      #  Retain_L_infl_com_domestic(1)_1999_2018
+#            -1            20            5           0      	      0             0            4      #  Retain_L_width_com_domestic(1)_1999_2018
+#           -10            1000          999         10            1             0           -2      #  Retain_L_asymptote_logit_com_domestic(1)_1999_2018
 #_ TIME VARYING LENGTH SELECTIVITY for commercial fleet
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE  	#  parm_name
-             0            10           2.5          0             0             0          3          	#  AgeSel_P1_com_domestic_1999_2018
-	     0            5            0.5          0             0             0          4          	#  AgeSel_P2_com_domestic_1999_2018
+ #            0            10           2.5          0             0             0          3          	#  AgeSel_P1_com_domestic_1999_2018
+ #	         0            5            0.5          0             0             0          4          	#  AgeSel_P2_com_domestic_1999_2018
 #
-0   #  use 2D_AR1 selectivity(0/1):  experimental feature
+
+0   #  use 2D_AR1 selectivity(0/1):  experimental feature #!!! Something wrong with time-varying selectivity since this should be a 0 but read as 1
 #_no 2D_AR1 selex offset used
+
 #  ------------------------ TAGGING
 # Tag loss and Tag reporting parameters go next
 0  # TG_custom:  0=no read; 1=read if tags exist
@@ -290,11 +304,11 @@
  #_6=mult_by_size-at-age_N
  #_7=mult_by_generalized_sizecomp
 #_Fact	Fleet	Value
-5	1	1		# com_domestic age comps	
-5	3	1		# spr_survey age comps multiplicative
-1	3	1		# spr_survey CPUE additive
-5	4	1		# fall_survey age comps multiplicative
-1	4	1		# fall_survey CPUE additive
+5	      1	      1		# com_domestic age comps	
+5	      3	      1		# spr_survey age comps multiplicative
+1	      3	      1		# spr_survey CPUE additive
+5	      4	      1		# fall_survey age comps multiplicative
+1	      4	      1		# fall_survey CPUE additive
 
 -9999   0    	0  # terminator
 #   -------------------------------------------------------------------- LAMBDAS
