@@ -110,7 +110,7 @@
 0  # 0/1 to use steepness in initial equ recruitment calculation
 0  #  future feature:  0/1 to make realized sigmaR a function of SR curvature
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn #  parm_name
-             3            35          10            10.3            10            0          1          0          0          0          0          0          0          0 # SR_LN(R0) # Rzero # !!! Converges when initial value = 8 & initial F = 0.1, doesn't predict catch well
+             3            35          10.6395            10.3            10            0          1          0          0          0          0          0          0          0 # SR_LN(R0) # Rzero # !!! Converges when initial value = 8 & initial F = 0.1, doesn't predict catch well
            0.2             1          0.75          0.75           0.064          3          -1         0          0          0          0          0          0          0 # SR_BH_steep
              0             2          0.8           0.8           0.8             0         -99         0          0          0          0          0          0          0 # SR_sigmaR
             -5             5            0             0             1             0         -4          0          0          0          0          0          0          0 # SR_regime
@@ -151,7 +151,7 @@
 6  # N iterations for tuning F in hybrid method (recommend 3 to 7)
 # setup initial F parms 
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  #  parm_name
-0.01                      0.7         0.1         0             0           0            1            # Initial F commercial_domestic !!! sensitive to starting values!!! 0.05 too small
+0.01                      0.7         0.120448         0             0           0            1            # Initial F commercial_domestic !!! sensitive to starting values!!! 0.05 too small
 
 #  ------------------------------------------------------------  Q SETUP FOR CPUE INDICES
 #_Q_setup for fleets with cpue or survey data
@@ -246,11 +246,11 @@
 
 #  -------------------- age selex init 
 #_          LO          HI          INIT        PRIOR           PR_SD     PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block   Blk_Fxn   #  parm_name
-            0           10          2         0               0         0           3        0         0         0           0           0            0       0         # Age_inflection_com_domestic(1)
+            0           10          1.5         0               0         0           3        0         0         0           0           0            0       0         # Age_inflection_com_domestic(1)
             0           10          0.04        0               0         0           3        0         0         0           0           0            0       0         # Age_95%width_com_domestic(1) # !!! Sensitive to starting value
 #           0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_com_foreign(2) # !!! not used mirror fleet 1
 #           0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_com_foreign(2) # !!! not used mirror fleet 1
-            0           10          1         0               0         0           3        0         0         0           0           0            0       0         # Age_inflection_spring_survey(3)
+            0           10          1.5         0               0         0           3        0         0         0           0           0            0       0         # Age_inflection_spring_survey(3)
             0           10          0.04        0               0         0           3        0         0         0           0           0            0       0         # Age_95%width_spring_survey(3) # !!! Sensitive to starting value
 #            0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_fall_survey(4)
 #            0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_fall_survey(4)
