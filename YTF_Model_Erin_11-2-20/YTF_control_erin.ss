@@ -36,7 +36,7 @@
 1 #_env/block/dev_adjust_method for all time-vary parms (1=warn relative to base parm bounds; 3=no bound check)
 #
 # AUTOGEN
-1 1 1 1 1 # autogen: 1st element for biology, 2nd for SR, 3rd for Q, 4th reserved, 5th for selex
+0 0 0 0 0 # autogen: 1st element for biology, 2nd for SR, 3rd for Q, 4th reserved, 5th for selex !!! Gavin set to 1, I change here to 0
 # where: 0 = autogen all time-varying parms; 1 = read each time-varying parm line; 2 = read then autogen if parm min==-12345
 #
 #_Available timevary codes
@@ -69,19 +69,19 @@
 1 	#_parameter_offset_approach (1=none, 2= M, G, CV_G as offset from female-GP1, 3=like SS2 V1.x)
 #
 #_GROWTH MATURITY FECUNDITY
-#_ LO 	HI 	INIT 	PRIOR 	PR_SD 	PR_type PHASE 	env_link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
- 0.1 	0.4 	0.3	0.3 	0 	0 	-2 	0 0 0 0 0 0 0 	# M_fem_Lorenz_at_ref 
- 0.01 	20 	5.7	3.5 	0 	0 	7 	0 0 0 0 0 0 0 	# L_at_Amin_Fem_GP_1  		# fall
- 30 	50 	35.2 	35.2 	0 	0 	7 	0 0 0 0 0 0 0 	# L_at_Amax_Fem_GP_1
- 0.3 	0.99 	0.85	0.85 	0 	0 	7 	0 0 0 0 0 0 0 	# VonBert_K_Fem_GP_1
- 0.05 	0.25 	0.1 	0.1 	0 	0 	-3 	0 0 0 0 0 0 0 	# CV_young_Fem_GP_1
- 0.05 	0.25 	0.1 	0.1 	0 	0 	-3 	0 0 0 0 0 0 0 	# CV_old_Fem_GP_1
- 1e-10 	1e-3   9.7e-06  9.7e-06  0 	0 	7 	0 0 0 0 0 0 0 	# Wtlen_1_Fem_GP_1		# fall
- 2.5 	3.5 	2.96 	2.96 	0 	0 	7 	0 0 0 0 0 0 0 	# Wtlen_2_Fem_GP_1
- 20 	35 	27.4 	27.4 	0 	0 	-3 	0 0 0 0 0 0 0 	# Mat50%_Fem_GP_1
- -3 	3 	-0.25 	-0.25 	0 	0 	-3 	0 0 0 0 0 0 0 	# Mat_slope_Fem_GP_1
- -3 	3 	1 	1 	0 	0 	-3 	0 0 0 0 0 0 0 	# Eggs/kg_inter_Fem_GP_1
- -3 	3 	0 	0 	0 	0 	-3 	0 0 0 0 0 0 0 	# Eggs/kg_slope_wt_Fem_GP_1
+#_ LO 	HI 	     INIT 	  PRIOR 	PR_SD 	PR_type PHASE 	env_link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
+ 0.1 	0.4 	 0.3	    0.3 	0 	    0 	     -2 	0 0 0 0 0 0 0 	# M_fem_Lorenz_at_ref 
+ 0.01 	20 	     5.7	    3.5 	0 	    0 	     -7 	0 0 0 0 0 0 0 	# L_at_Amin_Fem_GP_1  		# fall
+ 30 	50 	     35.2 	    35.2 	0 	    0 	     -7 	0 0 0 0 0 0 0 	# L_at_Amax_Fem_GP_1
+ 0.3 	0.99 	 0.85	    0.85 	0 	    0 	     -7 	0 0 0 0 0 0 0 	# VonBert_K_Fem_GP_1
+ 0.05 	0.25 	 0.1 	    0.1 	0 	    0 	     -3 	0 0 0 0 0 0 0 	# CV_young_Fem_GP_1
+ 0.05 	0.25 	 0.1 	    0.1 	0 	    0 	     -3 	0 0 0 0 0 0 0 	# CV_old_Fem_GP_1
+ 1e-10 	1e-3     9.7e-06    9.7e-06  0 	    0 	     -7 	0 0 0 0 0 0 0 	# Wtlen_1_Fem_GP_1		# fall
+ 2.5 	3.5 	 2.96 	    2.96 	0 	    0 	     -7 	0 0 0 0 0 0 0 	# Wtlen_2_Fem_GP_1
+ 20 	35 	     27.4 	    27.4 	0 	    0 	     -3 	0 0 0 0 0 0 0 	# Mat50%_Fem_GP_1
+ -3 	3 	    -0.25 	    -0.25 	0 	    0 	     -3 	0 0 0 0 0 0 0 	# Mat_slope_Fem_GP_1
+ -3 	3 	     1 	        1 	    0 	    0 	     -3 	0 0 0 0 0 0 0 	# Eggs/kg_inter_Fem_GP_1
+ -3 	3 	     0 	        0 	    0 	    0 	     -3 	0 0 0 0 0 0 0 	# Eggs/kg_slope_wt_Fem_GP_1
 # Hermaphroditism
 #  Recruitment Distribution 
 #_ LO 	HI 	INIT 	PRIOR 	PR_SD 	PR_type PHASE 	env_link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
@@ -95,8 +95,8 @@
 #  Age Error from parameters
 #  catch multiplier
 #  fraction female, by GP
-#_ LO 	HI 	INIT 	PRIOR 	PR_SD 	PR_type PHASE 	env_link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
-1e-06 	0.999999 0.5 	0.5 	0.5 	0 	-99 	0        0        0         0         0      0     0         # FracFemale_GP_1
+#_ LO 	HI 	     INIT 	PRIOR 	PR_SD 	PR_type   PHASE 	env_link dev_link dev_minyr dev_maxyr dev_PH Block Block_Fxn
+1e-06 	0.999999 0.5 	0.5 	0.5 	0 	      -99 	       0        0        0         0         0      0     0         # FracFemale_GP_1
 #
 #_no timevary MG parameters
 #
@@ -110,7 +110,7 @@
 0  # 0/1 to use steepness in initial equ recruitment calculation
 0  #  future feature:  0/1 to make realized sigmaR a function of SR curvature
 #_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn #  parm_name
-             3            35          12            10.3            10            0          1          0          0          0          0          0          0          0 # SR_LN(R0)
+             3            35          8            10.3            10            0          1          0          0          0          0          0          0          0 # SR_LN(R0) # Rzero # !!! Converges when initial value = 8 & initial F = 0.1, doesn't predict catch well
            0.2             1          0.75          0.75           0.064          3          -1         0          0          0          0          0          0          0 # SR_BH_steep
              0             2          0.8           0.8           0.8             0         -99         0          0          0          0          0          0          0 # SR_sigmaR
             -5             5            0             0             1             0         -4          0          0          0          0          0          0          0 # SR_regime
@@ -119,15 +119,15 @@
 1973 # first year of main recr_devs; early devs can preceed this era
 2018 # last year of main recr_devs; forecast devs start in following year
 2 #_recdev phase 
-1 # (0/1) to read 13 advanced options
+1 # (0/1) to read 13 advanced options !!! something wrong with this, if adjust ramp wrong then comercial catch = 0
  0 #_recdev_early_start (0=none; neg value makes relative to recdev_start)
  -4 #_recdev_early_phase
- 0 #_forecast_recruitment phase (incl. late recr) (0 value resets to maxphase+1)
  1 #_lambda for Fcast_recr_like occurring before endyr+1
- 1955 #_last_yr_nobias_adj_in_MPD; begin of ramp
- 1973 #_first_yr_fullbias_adj_in_MPD; begin of plateau
- 2019 #_last_yr_fullbias_adj_in_MPD
- 2019 #_end_yr_for_ramp_in_MPD (can be in forecast to shape ramp, but SS sets bias_adj to 0.0 for fcast yrs)
+ 0 #_forecast_recruitment phase (incl. late recr) (0 value resets to maxphase+1)
+ 1963 #_last_yr_nobias_adj_in_MPD; begin of ramp !!! or 1980 or 1955
+ 1973 #_first_yr_fullbias_adj_in_MPD; begin of plateau !!! or 1990
+ 2018 #_last_yr_fullbias_adj_in_MPD !!! or 2018 for last 2 or 2019
+ 2018 #_end_yr_for_ramp_in_MPD (can be in forecast to shape ramp, but SS sets bias_adj to 0.0 for fcast yrs)
  0.98 #_max_bias_adj_in_MPD (-1 to override ramp and set biasadj=1.0 for all estimated recdevs)
  0 #_period of cycles in recruitment (N parms read below)
  -5 #min rec_dev
@@ -144,12 +144,15 @@
 0.3 # F ballpark
 -2001 # F ballpark year (neg value to disable F ballpark)
 3 # F_Method:  1=Pope; 2=instan.(Baranov) every F is a parm use if you have bycatch fleets; 3=hybrid Baranov by F not parms (hybrid is recommended)
-4 # max F or harvest rate, depends on F_Method
+4 # max F or harvest rate, depends on F_Method !!! I had 4, switched to 3
 # no additional F input needed for Fmethod 1
 # if Fmethod=2; read overall start F value; overall phase; N detailed inputs to read
 # if Fmethod=3; read N iterations for tuning for Fmethod 3
 6  # N iterations for tuning F in hybrid method (recommend 3 to 7)
-#
+# setup initial F parms 
+#_          LO            HI          INIT         PRIOR         PR_SD       PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block    Blk_Fxn  #  parm_name
+0.01                      0.7         0.1         0             0           0            1            # Initial F commercial_domestic !!! sensitive to starting values!!! 0.05 too small
+
 #  ------------------------------------------------------------  Q SETUP FOR CPUE INDICES
 #_Q_setup for fleets with cpue or survey data
 #_1:  fleet number
@@ -159,8 +162,8 @@
 #_5:  0/1 for biasadj or not
 #_6:  0/1 to float	float to use analytical
 #_   fleet      link link_info  extra_se   biasadj     float  	#  fleetname
-         3	    1	 0	        0		   0	       1  	    #  spring_trawl
-         4	    1	 0	        0		   0	       1  	    #  fall_trawl
+         3	    1	 0	        0		   0	       0  	    #  spring_trawl !!! float = 1 use analytical solution
+         4	    2	 3	        0		   0	       0  	    #  fall_trawl
 -9999 		0 	0 	0 		0 	0	#  end input
 #
 # Ln_Q base - we are using float BUT parameter lines still expected
@@ -216,7 +219,7 @@
  12 		0 		   0 	    0 		# 1 com_domestic
  15 		0 		   0 	    1 		# 2 com_foreign # !!! Mirror fleet 1
  12 		0 		   0 	    0 		# 3 spring_trawl
- 12 		0 		   0 	    0 		# 4 fall_trawl
+ 15 		0 		   0 	    3 		# 4 fall_trawl # !!! Mirror fleet 3 !!! Doesn't appear to be different
 #  ---------------------------------------------------------------------------------  SELECTIVITY PARAMETERS
 #  note: in the SAW54, model selectivity was by age, 50% at 3, 100% at 4.
 # ------------ length-based retention and discard mortality for fleet 1
@@ -249,8 +252,8 @@
 #           0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_com_foreign(2) # !!! not used mirror fleet 1
             0           10          1.5         0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_spring_survey(3)
             0           10          0.05        0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_spring_survey(3)
-            0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_fall_survey(4)
-            0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_fall_survey(4)
+#            0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_fall_survey(4)
+#            0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_fall_survey(4)
 
 # The below are the wrong parameters for the current model setup
 #             0            10          2.3          0             0             0          3          0          0          0          0          0          1          2  	#  AgeSel_P1_com_domestic
