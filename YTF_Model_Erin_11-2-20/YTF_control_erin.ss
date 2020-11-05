@@ -247,11 +247,11 @@
 #  -------------------- age selex init 
 #_          LO          HI          INIT        PRIOR           PR_SD     PR_type      PHASE    env-var    use_dev   dev_mnyr   dev_mxyr     dev_PH      Block   Blk_Fxn   #  parm_name
             0           10          1.5         0               0         0           3        0         0         0           0           0            0       0         # Age_inflection_com_domestic(1)
-            0           10          0.05        0               0         0           3        0         0         0           0           0            0       0         # Age_95%width_com_domestic(1)
+            0           10          0.04        0               0         0           3        0         0         0           0           0            0       0         # Age_95%width_com_domestic(1) # !!! Sensitive to starting value
 #           0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_com_foreign(2) # !!! not used mirror fleet 1
 #           0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_com_foreign(2) # !!! not used mirror fleet 1
             0           10          1.5         0               0         0           3        0         0         0           0           0            0       0         # Age_inflection_spring_survey(3)
-            0           10          0.05        0               0         0           3        0         0         0           0           0            0       0         # Age_95%width_spring_survey(3)
+            0           10          0.04        0               0         0           3        0         0         0           0           0            0       0         # Age_95%width_spring_survey(3) # !!! Sensitive to starting value
 #            0           10          -1.5        0               0         0           -3        0         0         0           0           0            0       0         # Age_inflection_fall_survey(4)
 #            0           10          -0.05       0               0         0           -3        0         0         0           0           0            0       0         # Age_95%width_fall_survey(4)
 
