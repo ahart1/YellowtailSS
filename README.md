@@ -1,1 +1,1 @@
-#YellowtailSS
+This repository contains work on an example Stock Synthesis model for Yellowtail Flounder. My version of the model is in the main branch, an altered version of Erin's working model (which shortens the timeseries and removes time-varying selectivity compared to the lidach/YellowtailSS -Erin branch) is contained in the -Erin branch of this forked repository.
